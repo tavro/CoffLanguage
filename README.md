@@ -19,3 +19,9 @@ Hello World
 \> 145+146-10\*20
 
 91
+
+## Variables
+
+### String variables
+
+$VARIABLENAME = "value"
