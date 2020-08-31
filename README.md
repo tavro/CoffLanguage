@@ -1,5 +1,19 @@
 # Coff Language
 
+## Variables
+
+### String variables
+
+$VARIABLENAME = "value"
+
+### Int variables
+
+$VARIABLENAME = 42
+
+### Expression variables
+
+$VARIABLENAME = 42+43-1
+
 ## Printing
 
 ### Printing strings
@@ -20,8 +34,10 @@ Hello World
 
 91
 
-## Variables
-
-### String variables
+### Printing variables
 
 $VARIABLENAME = "value"
+
+\> $VARIABLENAME
+
+value
