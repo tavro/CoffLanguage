@@ -1,3 +1,5 @@
 > "print this"
 > "print this too"
 > "print this as well"
+> 145
+> (145+146)-10*20
