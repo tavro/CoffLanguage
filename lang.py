@@ -6,7 +6,7 @@ def print_line(o):
 	if o[0:6] == "STRING":
 		print(o[8:-1])
 	elif o[0:6] == "NUMBER" or o[0:6] == "EXPRES":
-		print(o[7:])
+		print(eval(o[7:]))
 
 def open_file(filename):
 	data = open(filename, "r").read()
@@ -23,7 +23,7 @@ def lex(contents):
 	state = 0
 
 	is_expression = False
-	
+
 	contents = list(contents)
 	for c in contents:
 		token += c
@@ -44,7 +44,7 @@ def lex(contents):
 		elif len(token) == 1 and token.isdigit():
 			expression += token
 			token = ""
-		elif token in "+-*/()":
+		elif token in "+-*/":
 			is_expression = True
 			expression += token
 			token = ""

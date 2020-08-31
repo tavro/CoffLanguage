@@ -16,6 +16,6 @@ Hello World
 
 ### Printing expressions
 
-\> (42-2+2)\*2
+\> 145+146-10\*20
 
-(42-2+2)\*2
+91
