@@ -1,12 +1,16 @@
 from sys import *
 
 tokens = []
+symbols = {}
 
 def print_line(o):
 	if o[0:6] == "STRING":
 		print(o[8:-1])
 	elif o[0:6] == "NUMBER" or o[0:6] == "EXPRES":
 		print(eval(o[7:]))
+
+def assign_variable(n, v):
+	symbols[n] = v
 
 def open_file(filename):
 	data = open(filename, "r").read()
@@ -19,10 +23,12 @@ def lex(contents):
 	string = ""
 	expression = ""
 	number = ""
+	var = ""
 
 	state = 0
 
 	is_expression = False
+	var_started = False
 
 	contents = list(contents)
 	for c in contents:
@@ -37,6 +43,24 @@ def lex(contents):
 			elif expression != "" and not is_expression:
 				tokens.append("NUMBER:" + expression)
 				expression = ""
+			elif var != "":
+				tokens.append("VARIAB:" + var)
+				var = ""
+				var_started = False
+			token = ""
+		elif token == "=" and state == 0:
+			if var != "":
+				tokens.append("VARIAB:" + var)
+				var = ""
+				var_started = False
+			tokens.append("EQUALS")
+			token = ""
+		elif token == "$" and state == 0:
+			var_started = True
+			var += token
+			token = ""
+		elif var_started:
+			var += token
 			token = ""
 		elif token == ">":
 			tokens.append("PRINT")
@@ -44,7 +68,7 @@ def lex(contents):
 		elif len(token) == 1 and token.isdigit():
 			expression += token
 			token = ""
-		elif token in "+-*/":
+		elif token in "+-*/%()":
 			is_expression = True
 			expression += token
 			token = ""
@@ -67,6 +91,10 @@ def parse(token_list):
 		if token_list[i] == "PRINT":
 			print_line(token_list[i+1])
 			i+=2
+		if token_list[i][0:6] + " " + token_list[i + 1] + " " + token_list[i + 2][0:6] == "VARIAB EQUALS STRING":
+			assign_variable(token_list[i][7:], token_list[i+2])
+			i+=3
+	print(symbols)
 
 def run():
 	data = open_file("program.coff")
