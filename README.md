@@ -1,2 +1,4 @@
 # Coff Language
-> "Hello World"
+
+## Printing a string
+\> "Hello World"
