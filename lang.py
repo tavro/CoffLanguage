@@ -8,9 +8,17 @@ def print_line(o):
 		print(o[8:-1])
 	elif o[0:6] == "NUMBER" or o[0:6] == "EXPRES":
 		print(eval(o[7:]))
+	elif o[0:6] == "VARIAB":
+		print_line(get_variable(o[7:]))
 
 def assign_variable(n, v):
 	symbols[n] = v
+
+def get_variable(n):
+	if n in symbols:
+		return symbols[n]
+	else:
+		return None
 
 def open_file(filename):
 	data = open(filename, "r").read()
@@ -91,10 +99,13 @@ def parse(token_list):
 		if token_list[i] == "PRINT":
 			print_line(token_list[i+1])
 			i+=2
-		if token_list[i][0:6] + " " + token_list[i + 1] + " " + token_list[i + 2][0:6] == "VARIAB EQUALS STRING":
-			assign_variable(token_list[i][7:], token_list[i+2])
-			i+=3
-	print(symbols)
+		elif token_list[i][0:6] + " " + token_list[i + 1] == "VARIAB EQUALS":
+			if token_list[i + 2][0:6] == "STRING" or token_list[i + 2][0:6] == "NUMBER":
+				assign_variable(token_list[i][7:], token_list[i+2])
+				i+=3
+			elif token_list[i + 2][0:6] == "EXPRES":
+				assign_variable(token_list[i][7:], "NUMBER:" + str(eval(token_list[i+2][7:])))
+				i+=3
 
 def run():
 	data = open_file("program.coff")
