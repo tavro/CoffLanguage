@@ -20,17 +20,9 @@ variableName = otherVariableName
 
 ## Input
 
-### Storing variables
+### Storing input in variables
 
 < variableName
-
-### Storing numbers
-
-< 10
-
-### Storing strings
-
-< "value"
 
 ## Printing
 
