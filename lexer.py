@@ -2,7 +2,7 @@ from sly import Lexer
 from sly import Parser
 
 class CoffLexer(Lexer):
-    tokens = {VARIABLE, NUMBER, STRING, PRINT, INPUT}
+    tokens = {VARIABLE, NUMBER, STRING, PRINT, INPUT, DEQUALS, IF, LOOP, FUNC}
     ignore = '\t '
 
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';' }
@@ -11,7 +11,12 @@ class CoffLexer(Lexer):
     STRING = r'\".*?\"'
     PRINT = r'>'
     INPUT = r'<'
-    #FUNC = r'@'
+    DEQUALS = r'=='
+    IF = r'\?'
+    #ELSEIF = r'\?\?'
+    #ELSE = r'\?\?\?'
+    LOOP = r'@'
+    FUNC = r'#'
 
     @_(r'\d+')
     def NUMBER(self, t):
@@ -46,6 +51,10 @@ class CoffParser(Parser):
     def expression(self, p):
         return ('str', p.STRING)
 
+    @_('VARIABLE')
+    def expression(self, p):
+        return ('var', p.VARIABLE)
+
     @_('variable_assignment')
     def statement(self, p):
         return p.variable_assignment
@@ -54,6 +63,10 @@ class CoffParser(Parser):
     def statement(self, p):
         return p.print_line
 
+    @_('for_loop')
+    def statement(self, p):
+    	return(p.for_loop)
+
     @_('store_line')
     def statement(self, p):
         return p.store_line
@@ -61,6 +74,14 @@ class CoffParser(Parser):
     @_('expression')
     def statement(self, p):
         return (p.expression)
+
+    @_('FUNC VARIABLE')
+    def statement(self, p):
+    	return ('function', p.VARIABLE)
+
+    @_('IF condition')
+    def statement(self, p):
+        return ('if_statement', p.condition)
 
     @_('PRINT STRING')
     def print_line(self, p):
@@ -74,17 +95,9 @@ class CoffParser(Parser):
     def print_line(self, p):
     	return ('print_line', p.expression)
 
-    @_('INPUT STRING')
-    def store_line(self, p):
-    	return ('store_line', p.STRING)
-
     @_('INPUT VARIABLE')
     def store_line(self, p):
     	return ('store_line', p.VARIABLE)
-
-    @_('INPUT expression')
-    def store_line(self, p):
-    	return ('store_line', p.expression)
 
     @_('VARIABLE "=" expression')
     def variable_assignment(self, p):
@@ -93,6 +106,22 @@ class CoffParser(Parser):
     @_('VARIABLE "=" STRING')
     def variable_assignment(self, p):
         return ('variable_assignment', p.VARIABLE, p.STRING)
+
+    @_('VARIABLE "=" VARIABLE')
+    def variable_assignment(self, p):
+        return ('variable_assignment', p.VARIABLE, p.VARIABLE)
+
+    @_('LOOP VARIABLE expression expression')
+    def for_loop(self, p):
+    	return ('for_loop', p.VARIABLE, p.expression0, p.expression1)
+
+    @_('LOOP expression expression')
+    def for_loop(self, p):
+    	return ('for_loop', p.expression0, p.expression1)
+
+    @_('LOOP expression')
+    def for_loop(self, p):
+    	return ('for_loop', p.expression)
 
     @_('expression "+" expression')
     def expression(self, p):
@@ -114,9 +143,9 @@ class CoffParser(Parser):
     def expression(self, p):
         return p.expression
 
-    @_('VARIABLE')
-    def expression(self, p):
-        return ('var', p.VARIABLE)
+    @_('expression DEQUALS expression')
+    def condition(self, p):
+        return ('condition_dequals', p.expression0, p.expression1)
 
     @_('NUMBER')
     def expression(self, p):
@@ -130,4 +159,5 @@ if __name__ == '__main__':
     with open("program.coff") as file:
     	for line in file:
         	tree = parser.parse(lexer.tokenize(line))
-        	print(tree)
+        	if tree:
+        		print(tree)

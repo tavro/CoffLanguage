@@ -1,13 +1,29 @@
 var = 1
 var2 = "hej"
+var3 = var2
+
 1 + 2
 10
 "strang"
+
 > "starfdas"
 > var
 > 10
 > 42-42
-< "starfdas"
+
 < var
-< 10
-< 42-42
+
+! ignore this
+
+
+
+! ignore those too
+
+? 1 + 2 == 2 + 1
+
+@ variableName 0 10
+@ 0 10
+@ 10
+
+# functionName
+# functionName2
