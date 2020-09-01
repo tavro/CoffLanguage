@@ -65,7 +65,7 @@ class CoffParser(Parser):
 
     @_('for_loop')
     def statement(self, p):
-    	return(p.for_loop)
+        return(p.for_loop)
 
     @_('store_line')
     def statement(self, p):
@@ -77,7 +77,7 @@ class CoffParser(Parser):
 
     @_('FUNC VARIABLE')
     def statement(self, p):
-    	return ('function', p.VARIABLE)
+        return ('function', p.VARIABLE)
 
     @_('IF condition')
     def statement(self, p):
@@ -85,19 +85,19 @@ class CoffParser(Parser):
 
     @_('PRINT STRING')
     def print_line(self, p):
-    	return ('print_line', p.STRING)
+        return ('print_line', p.STRING)
 
     @_('PRINT VARIABLE')
     def print_line(self, p):
-    	return ('print_line', p.VARIABLE)
+        return ('print_line', p.VARIABLE)
 
     @_('PRINT expression')
     def print_line(self, p):
-    	return ('print_line', p.expression)
+        return ('print_line', p.expression)
 
     @_('INPUT VARIABLE')
     def store_line(self, p):
-    	return ('store_line', p.VARIABLE)
+        return ('store_line', p.VARIABLE)
 
     @_('VARIABLE "=" expression')
     def variable_assignment(self, p):
@@ -113,15 +113,15 @@ class CoffParser(Parser):
 
     @_('LOOP VARIABLE expression expression')
     def for_loop(self, p):
-    	return ('for_loop', p.VARIABLE, p.expression0, p.expression1)
+        return ('for_loop', p.VARIABLE, p.expression0, p.expression1)
 
     @_('LOOP expression expression')
     def for_loop(self, p):
-    	return ('for_loop', p.expression0, p.expression1)
+        return ('for_loop', p.expression0, p.expression1)
 
     @_('LOOP expression')
     def for_loop(self, p):
-    	return ('for_loop', p.expression)
+        return ('for_loop', p.expression)
 
     @_('expression "+" expression')
     def expression(self, p):
@@ -150,14 +150,3 @@ class CoffParser(Parser):
     @_('NUMBER')
     def expression(self, p):
         return ('num', p.NUMBER)
-
-if __name__ == '__main__':
-    lexer = CoffLexer()
-    parser = CoffParser()
-    env = {}
-
-    with open("program.coff") as file:
-    	for line in file:
-        	tree = parser.parse(lexer.tokenize(line))
-        	if tree:
-        		print(tree)
