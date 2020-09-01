@@ -52,6 +52,7 @@ def lex(contents):
 			if expression != "" and is_expression:
 				tokens.append("EXPRES:" + expression)
 				expression = ""
+				is_expression = False;
 			elif expression != "" and not is_expression:
 				tokens.append("NUMBER:" + expression)
 				expression = ""
@@ -61,11 +62,17 @@ def lex(contents):
 				var_started = False
 			token = ""
 		elif token == "=" and state == 0:
+			if expression != "" and not is_expression:
+				tokens.append("NUMBER:" + expression)
+				expression = ""
 			if var != "":
 				tokens.append("VARIAB:" + var)
 				var = ""
 				var_started = False
-			tokens.append("EQUALS")
+			if tokens[-1] == "EQUALS":
+				tokens[-1] = ("EQUEQU")
+			else:
+				tokens.append("EQUALS")
 			token = ""
 		elif token == "$" and state == 0:
 			var_started = True
@@ -80,12 +87,26 @@ def lex(contents):
 		elif token == "<":
 			tokens.append("INPUT")
 			token = ""
+		elif token == ";":
+			tokens.append("ENDIF")
+			token = ""
+		elif token == "if[":
+			tokens.append("IF")
+			token = ""
+		elif token == "]":
+			if expression != "" and not is_expression:
+				tokens.append("NUMBER:" + expression)
+				expression = ""
+			tokens.append("THEN")
+			token = ""
 		elif len(token) == 1 and token.isdigit():
 			expression += token
 			token = ""
 		elif token in "+-*/%()":
 			is_expression = True
 			expression += token
+			token = ""
+		elif token == "\t":
 			token = ""
 		elif token == "\"":
 			if state == 0:
@@ -103,7 +124,9 @@ def lex(contents):
 def parse(token_list):
 	i = 0
 	while i < len(token_list):
-		if token_list[i] == "PRINT":
+		if token_list[i] == "ENDIF":
+			i+=1
+		elif token_list[i] == "PRINT":
 			print_line(token_list[i+1])
 			i+=2
 		elif token_list[i][0:6] + " " + token_list[i + 1] == "VARIAB EQUALS":
@@ -117,10 +140,16 @@ def parse(token_list):
 		elif token_list[i] + " " + token_list[i + 1][0:6] == "INPUT VARIAB":
 			get_input(token_list[i + 1][7:])
 			i+=2
+		elif token_list[i] + " " + token_list[i + 1][0:6] + " " + token_list[i + 2] + " " + token_list[i + 3][0:6]  + " " + token_list[i + 4]== "IF NUMBER EQUEQU NUMBER THEN":
+			if token_list[i + 1][7:] == token_list[i + 3][7:]:
+				pass
+			else:
+				pass
+			i+=5
 
 def run():
 	data = open_file("program.coff")
-	token_list = lex(data)
+	tokens = lex(data)
 	parse(tokens)
 
 run()
