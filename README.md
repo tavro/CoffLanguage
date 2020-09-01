@@ -23,7 +23,9 @@ $VARIABLENAME = $OTHERVARIABLENAME
 ### If-statements
 
 if[ 1 == 1 ]
+
 	\> "Print this"
+	
 ;
 
 ## Input
