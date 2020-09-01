@@ -1,6 +1,13 @@
 # Coff Language
 This project is something I am working on to learn/for fun.
 
+coff.py is the entrypoint and does always go together with a program.coff file
+
+to run your coff program simply write 
+```
+py coff.py
+```
+in  the terminal
 ## Example Programs
 
 ```
