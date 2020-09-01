@@ -102,10 +102,12 @@ def parse(token_list):
 		elif token_list[i][0:6] + " " + token_list[i + 1] == "VARIAB EQUALS":
 			if token_list[i + 2][0:6] == "STRING" or token_list[i + 2][0:6] == "NUMBER":
 				assign_variable(token_list[i][7:], token_list[i+2])
-				i+=3
 			elif token_list[i + 2][0:6] == "EXPRES":
 				assign_variable(token_list[i][7:], "NUMBER:" + str(eval(token_list[i+2][7:])))
-				i+=3
+				
+			elif token_list[i + 2][0:6] == "VARIAB":
+				assign_variable(token_list[i][7:], get_variable(token_list[i+2][7:]))
+			i+=3
 
 def run():
 	data = open_file("program.coff")

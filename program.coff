@@ -9,3 +9,6 @@ $VARNAME2 = 42+43-1
 > $VARNAME
 > $VARNAME1
 > $VARNAME2
+$var = "hej"
+$var2 = $var
+> $var2
