@@ -12,3 +12,6 @@ $VARNAME2 = 42+43-1
 $var = "hej"
 $var2 = $var
 > $var2
+> "Input value for var"
+< $var3
+> $var3

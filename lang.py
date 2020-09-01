@@ -20,6 +20,10 @@ def get_variable(n):
 	else:
 		return None
 
+def get_input(n):
+	i = input()
+	symbols[n] = "STRING:\"" + i + "\""
+
 def open_file(filename):
 	data = open(filename, "r").read()
 	data += "\n"
@@ -73,6 +77,9 @@ def lex(contents):
 		elif token == ">":
 			tokens.append("PRINT")
 			token = ""
+		elif token == "<":
+			tokens.append("INPUT")
+			token = ""
 		elif len(token) == 1 and token.isdigit():
 			expression += token
 			token = ""
@@ -104,10 +111,12 @@ def parse(token_list):
 				assign_variable(token_list[i][7:], token_list[i+2])
 			elif token_list[i + 2][0:6] == "EXPRES":
 				assign_variable(token_list[i][7:], "NUMBER:" + str(eval(token_list[i+2][7:])))
-				
 			elif token_list[i + 2][0:6] == "VARIAB":
 				assign_variable(token_list[i][7:], get_variable(token_list[i+2][7:]))
 			i+=3
+		elif token_list[i] + " " + token_list[i + 1][0:6] == "INPUT VARIAB":
+			get_input(token_list[i + 1][7:])
+			i+=2
 
 def run():
 	data = open_file("program.coff")
