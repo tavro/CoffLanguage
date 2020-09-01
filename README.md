@@ -18,6 +18,12 @@ $VARIABLENAME = 42+43-1
 
 $VARIABLENAME = $OTHERVARIABLENAME
 
+## Input
+
+### Storing input in variable
+
+< $VARNAME
+
 ## Printing
 
 ### Printing strings
