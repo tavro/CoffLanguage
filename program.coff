@@ -1,20 +1,13 @@
-> "print this"
-> "print this too"
-> "print this as well"
-> 145
-> 145+146-(10*20)
-$VARNAME = "Printable"
-$VARNAME1 = 42
-$VARNAME2 = 42+43-1
-> $VARNAME
-> $VARNAME1
-> $VARNAME2
-$var = "hej"
-$var2 = $var
-> $var2
-> "Input value for var"
-< $var3
-> $var3
-if[ 1 == 1 ]
-	> "Inside if"
-;
+var = 1
+var2 = "hej"
+1 + 2
+10
+"strang"
+> "starfdas"
+> var
+> 10
+> 42-42
+< "starfdas"
+< var
+< 10
+< 42-42

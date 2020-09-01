@@ -4,11 +4,12 @@ tokens = []
 symbols = {}
 
 def print_line(o):
-	if o[0:6] == "STRING":
+	token = o[0:6]
+	if token == "STRING":
 		print(o[8:-1])
-	elif o[0:6] == "NUMBER" or o[0:6] == "EXPRES":
+	elif token == "NUMBER" or token == "EXPRES":
 		print(eval(o[7:]))
-	elif o[0:6] == "VARIAB":
+	elif token == "VARIAB":
 		print_line(get_variable(o[7:]))
 
 def assign_variable(n, v):
