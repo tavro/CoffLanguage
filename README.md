@@ -62,7 +62,7 @@ value
 
 ## Comments
 
-### Online comments
+### One-line comments
 
 ! This is a comment
 
