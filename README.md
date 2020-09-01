@@ -18,6 +18,38 @@ variableName = 10+20+30/40\*50
 
 variableName = otherVariableName
 
+## Loops
+
+### For-loops
+
+#### Alternative 1
+
+@ variableName value1 value2
+
+Loops variable from value1 up to value2
+
+#### Alternative 2
+
+@ value1 value2
+
+Loops default variable called "i" from value1 up to value2
+
+#### Alternative 3
+
+@ endValue
+
+Loops default variable called "i" from 0 up to endValue
+
+## Conditions
+
+### If-statement
+
+? expression1 == expression2
+
+## Functions
+
+\# functionName
+
 ## Input
 
 ### Storing input in variables
