@@ -18,6 +18,14 @@ $VARIABLENAME = 42+43-1
 
 $VARIABLENAME = $OTHERVARIABLENAME
 
+## Conditions
+
+### If-statements
+
+if[ 1 == 1 ]
+	\> "Print this"
+;
+
 ## Input
 
 ### Storing input in variable
