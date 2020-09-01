@@ -1,4 +1,4 @@
-import lexerparser, program
+import lexerparser, interpreter
 
 if __name__ == '__main__':
     parser = lexerparser.CoffParser()
@@ -13,5 +13,5 @@ if __name__ == '__main__':
         		instructions.append(tree)
         		#print(tree)
 
-prog = program.CoffProgram()
+prog = interpreter.CoffProgram()
 prog.run_instructions(instructions)
