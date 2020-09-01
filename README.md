@@ -1,4 +1,5 @@
 # Coff Language
+This project is something I am working on to learn/for fun.
 
 ## Example Programs
 
