@@ -30,9 +30,17 @@ if[ 1 == 1 ]
 
 ## Input
 
-### Storing input in variable
+### Storing variables
 
-< $VARNAME
+< variableName
+
+### Storing numbers
+
+< 10
+
+### Storing strings
+
+< "value"
 
 ## Printing
 
