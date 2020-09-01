@@ -14,6 +14,10 @@ $VARIABLENAME = 42
 
 $VARIABLENAME = 42+43-1
 
+### Variable variables
+
+$VARIABLENAME = $OTHERVARIABLENAME
+
 ## Printing
 
 ### Printing strings
