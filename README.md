@@ -1,5 +1,24 @@
 # Coff Language
 
+## Example Programs
+
+```
+! Hello World in Coff
+
+> "Hello World!"
+```
+
+```
+! Simple program
+
+# main
+  @ i 0 10
+    ? i == 10
+      > "This is the last index, would you like to share some of your thoughts?"
+      < answer
+      > answer
+```
+
 ## Variables
 
 ### String variables
