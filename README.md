@@ -24,8 +24,8 @@ $VARIABLENAME = $OTHERVARIABLENAME
 
 if[ 1 == 1 ]
 
-	\> "Print this"
-	
+\> "Print this"
+
 ;
 
 ## Input
