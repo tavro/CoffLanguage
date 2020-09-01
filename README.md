@@ -18,16 +18,6 @@ variableName = 10+20+30/40\*50
 
 variableName = otherVariableName
 
-## Conditions
-
-### If-statements
-
-if[ 1 == 1 ]
-
-\> "Print this"
-
-;
-
 ## Input
 
 ### Storing variables
