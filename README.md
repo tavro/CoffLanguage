@@ -4,19 +4,19 @@
 
 ### String variables
 
-$VARIABLENAME = "value"
+variableName = "value"
 
 ### Int variables
 
-$VARIABLENAME = 42
+variableName = 10
 
 ### Expression variables
 
-$VARIABLENAME = 42+43-1
+variableName = 10+20+30/40\*50
 
 ### Variable variables
 
-$VARIABLENAME = $OTHERVARIABLENAME
+variableName = otherVariableName
 
 ## Conditions
 
@@ -56,8 +56,8 @@ Hello World
 
 ### Printing variables
 
-$VARIABLENAME = "value"
+variableName = "value"
 
-\> $VARIABLENAME
+\> variableName
 
 value
