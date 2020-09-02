@@ -25,6 +25,9 @@ in  the terminal
       > "This is the last index, would you like to share some of your thoughts?"
       < answer
       > answer
+    .
+  .
+.
 ```
 
 ## Variables
