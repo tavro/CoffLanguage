@@ -78,7 +78,15 @@ Loops default variable called "i" from 0 up to endValue
 
 ## Functions
 
+defining a function:
+
 \# functionName
+	!do stuff
+.
+
+calling a function:
+
+functionName
 
 ## Input
 
