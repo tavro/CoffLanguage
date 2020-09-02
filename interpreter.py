@@ -1,6 +1,5 @@
 class CoffProgram():
-	@staticmethod
-	def run_instructions(instructions):
+	def run_instructions(self, instructions):
 		variables = {}
 		for instruction in instructions:
 			if instruction[0] == 'variable_assignment':
@@ -21,4 +20,29 @@ class CoffProgram():
 					print(variable_value[1:-1])
 				else:
 					print(variable_value)
-		print("STORED VARIABLES:", variables)
+			if instruction[0][0] == 'for_loop':
+				for i in range(instruction[0][2][1], instruction[0][3][1]):
+					self.run_instructions(instruction[1:])
+			if instruction[0][0] == 'function':
+				self.run_instructions(instruction[1:])
+		#print("STORED VARIABLES:", variables)
+
+	def pack_functions(self, instructions):
+		packed_instructions = []
+		function_template = []
+		constructing_function = False
+		for instruction in instructions:
+			if constructing_function:
+				if instruction == 'return_value':
+					packed_instructions.append(function_template)
+					function_template = []
+					constructing_function = False
+				else:
+					function_template.append(instruction)
+			else:
+				if instruction[0] == 'function' or instruction[0] == 'for_loop':
+					function_template.append(instruction)
+					constructing_function = True
+				else:
+					packed_instructions.append(instruction)
+		return packed_instructions

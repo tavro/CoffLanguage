@@ -21,8 +21,25 @@ var3 = var2
 ? 1 + 2 == 2 + 1
 
 @ variableName 0 10
+	> "testing looping alternative 1"
+.
+
 @ 0 10
+	> "testing looping alternative 2"
+.
+
 @ 10
+	> "testing looping alternative 3"
+.
 
 # functionName
+	> "testing function call"
+	varnameeee = "test"
+.
+
 # functionName2
+	> "testing function call again"
+.
+
+functionName
+functionName2

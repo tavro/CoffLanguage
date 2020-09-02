@@ -13,5 +13,8 @@ if __name__ == '__main__':
         		instructions.append(tree)
         		#print(tree)
 
+#print(instructions)
 prog = interpreter.CoffProgram()
+instructions = prog.pack_functions(instructions)
+#print(instructions)
 prog.run_instructions(instructions)

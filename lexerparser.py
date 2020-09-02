@@ -2,7 +2,7 @@ from sly import Lexer
 from sly import Parser
 
 class CoffLexer(Lexer):
-    tokens = {VARIABLE, NUMBER, STRING, PRINT, INPUT, DEQUALS, IF, LOOP, FUNC}
+    tokens = {VARIABLE, NUMBER, STRING, PRINT, INPUT, DEQUALS, IF, LOOP, FUNC, RETURN}
     ignore = '\t '
 
     literals = { '=', '+', '-', '/', '*', '(', ')', ',', ';' }
@@ -17,6 +17,7 @@ class CoffLexer(Lexer):
     #ELSE = r'\?\?\?'
     LOOP = r'@'
     FUNC = r'#'
+    RETURN = r'\.'
 
     @_(r'\d+')
     def NUMBER(self, t):
@@ -79,6 +80,10 @@ class CoffParser(Parser):
     def statement(self, p):
         return ('function', p.VARIABLE)
 
+    @_('RETURN')
+    def statement(self, p):
+        return ('return_value')
+
     @_('IF condition')
     def statement(self, p):
         return ('if_statement', p.condition)
@@ -117,11 +122,11 @@ class CoffParser(Parser):
 
     @_('LOOP expression expression')
     def for_loop(self, p):
-        return ('for_loop', p.expression0, p.expression1)
+        return ('for_loop', ('var', "i"), p.expression0, p.expression1)
 
     @_('LOOP expression')
     def for_loop(self, p):
-        return ('for_loop', p.expression)
+        return ('for_loop', ('var', "i"), ('num', 0), p.expression)
 
     @_('expression "+" expression')
     def expression(self, p):
