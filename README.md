@@ -120,3 +120,23 @@ value
 
 ! This is a comment
 
+## Goal
+
+```
+! Goal functionality and syntax
+
+[PROGRAM]
+	# main : variableName1, variableName2, variableName3
+	  @ i 0 10
+	    ? i == 10
+	      > "This is the last index, would you like to share some of your thoughts?"
+	      < answer
+	      > answer
+	    .
+	  .
+	.
+.
+
+program = PROGRAM
+program.main : variable1, variable2, variable3
+```
