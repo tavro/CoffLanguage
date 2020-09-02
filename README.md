@@ -80,9 +80,11 @@ Loops default variable called "i" from 0 up to endValue
 
 defining a function:
 
+```
 \# functionName
 	!do stuff
 .
+```
 
 calling a function:
 
