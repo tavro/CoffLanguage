@@ -54,19 +54,31 @@ variableName = otherVariableName
 
 #### Alternative 1
 
+```
 @ variableName value1 value2
+	!do stuff value2 times
+.
+```
 
 Loops variable from value1 up to value2
 
 #### Alternative 2
 
+```
 @ value1 value2
+	!do stuff value2 times
+.
+```
 
 Loops default variable called "i" from value1 up to value2
 
 #### Alternative 3
 
+```
 @ endValue
+	!do stuff endValue times
+.
+```
 
 Loops default variable called "i" from 0 up to endValue
 
@@ -74,7 +86,11 @@ Loops default variable called "i" from 0 up to endValue
 
 ### If-statement
 
+```
 ? expression1 == expression2
+	!do stuff if expression 1 = expression2
+.
+```
 
 ## Functions
 
