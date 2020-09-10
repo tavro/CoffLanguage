@@ -19,6 +19,8 @@ var3 = var2
 ! ignore those too
 
 ? 1 + 2 == 2 + 1
+	> "trueee that"
+.
 
 @ variableName 0 10
 	> "testing looping alternative 1"
